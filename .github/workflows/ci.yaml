@@ -34,11 +34,11 @@ jobs:
         echo "Checking for vulnerabilities using Safety"
         if [ -f requirements.txt ]; then
           echo "requirements.txt found. Scanning dependencies..."
-          safety scan --file=requirements.txt --output=json > safety-report.json
+          safety scan --file=requirements.txt --output=json > safety-report.json || exit 1
         else
           echo "requirements.txt not found. Scanning environment..."
           python -m pip freeze > env-requirements.txt
-          safety scan --file=env-requirements.txt --output=json > safety-report.json
+          safety scan --file=env-requirements.txt --output=json > safety-report.json || exit 1
         fi
 
     - name: Display Safety Report
