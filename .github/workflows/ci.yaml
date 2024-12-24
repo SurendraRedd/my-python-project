@@ -27,4 +27,4 @@ jobs:
         pip install ruff
 
     - name: Run Ruff for Coding Standards
-      run: ruff check src --format text --show-source
+      run: ruff check src
