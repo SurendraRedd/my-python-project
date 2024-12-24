@@ -33,7 +33,7 @@ jobs:
       run: bandit -r src
 
     - name: Run Safety for Dependency Vulnerabilities
-      run: safety scan --json --output=safety-report.json
+      run: safety scan --output=json > safety-report.json
 
     - name: Display Safety Report
       run: cat safety-report.json
