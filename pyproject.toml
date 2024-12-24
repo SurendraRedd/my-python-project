@@ -1,0 +1,4 @@
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W"]  # Enable specific rule categories
+ignore = ["E501"]  # Ignore line length issues
