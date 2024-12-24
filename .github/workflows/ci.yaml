@@ -34,7 +34,7 @@ jobs:
         if [ -f requirements.txt ]; then
           safety scan --file=requirements.txt --output=json > safety-report.json
         else
-          safety scan --full-report --output=json > safety-report.json
+          safety scan --full-report --output=json --stdin < /dev/null > safety-report.json
         fi
 
     - name: Display Safety Report
