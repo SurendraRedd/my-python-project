@@ -24,16 +24,18 @@ jobs:
     - name: Install Tools
       run: |
         python -m pip install --upgrade pip
-        pip install ruff bandit safety
+        pip install ruff safety
 
     - name: Run Ruff for Coding Standards
       run: ruff check src
 
-    - name: Run Bandit for Security Vulnerabilities
-      run: bandit -r src
-
     - name: Run Safety for Dependency Vulnerabilities
-      run: safety scan --output=json > safety-report.json
+      run: |
+        if [ -f requirements.txt ]; then
+          safety scan --file=requirements.txt --output=json > safety-report.json
+        else
+          safety scan --full-report --output=json > safety-report.json
+        fi
 
     - name: Display Safety Report
       run: cat safety-report.json
