@@ -1,4 +1,4 @@
-name: Python Code Standards Check
+name: Python Code Standards and Security Check
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  lint:
+  lint-and-security:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,10 +21,16 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Install Ruff
+    - name: Install Tools
       run: |
         python -m pip install --upgrade pip
-        pip install ruff
+        pip install ruff bandit safety
 
     - name: Run Ruff for Coding Standards
       run: ruff check src
+
+    - name: Run Bandit for Security Vulnerabilities
+      run: bandit -r src
+
+    - name: Run Safety for Dependency Vulnerabilities
+      run: safety check --full-report
